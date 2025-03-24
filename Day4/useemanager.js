@@ -62,12 +62,12 @@ userFound=true;
 }
 if(userFound){
 
-res.write("user updated");
-            res.end();
+//res.write("user updated");
+            res.end("user updated");
 }
 else{
-res.write("user not found");
-            res.end();
+//res.write("user not found");
+            res.end("user not found);
 }
 
     }
@@ -76,7 +76,7 @@ res.write("user not found");
     else if (req.url.includes("/insertUser")) {
         const params = req.url.split("?")[1].split("&");
         const name = params[0].split("=")[1];
-const age = params[1].split("=")[1];
+const age = parseInt(params[1].split("=")[1]);
 
 const place = params[2].split("=")[1];
 
@@ -87,8 +87,8 @@ age,
 place
 }
 );
-        res.write("users added");
-        res.end(JSON.stringify({ message: "User added"}));
+        //res.write("users added");
+        res.end(JSON.stringify({  "User added"}));
     }
 
     // **DELETE a user**
@@ -109,28 +109,28 @@ place
 else if(req.url.includes("/getTotalUsers")){
 
 const totalUser=users.length;
-res.write("total user:",totalUser);
-            res.end();
+//res.write("total user:",totalUser);
+            res.end(JSON.stringify("total user:",totalUser);
 }
 
 else if(req.url.includes("/getFirstUser")){
 //const first=users[0];
-res.write("first user:",users[0]);
-            res.end();
+//res.write("first user:",users[0]);
+            res.end(JSON.stringify("first user:",users[0]);
 }
 
 else if(req.url.includes("/getLastUser")){
 
 res.write("last user:",users[users.length-1]);
-            res.end();
+            res.end(JSON.stringify("last user:",users[users.length-1]));
 }
 
 else if(req.url.includes("/getUsersAt")){
 let place=req.url.split("?")[1].split("=")[1];
 for(i=0;i<users.length;i++){
 if(users[i].place==place){
-res.write(users[i]);
-            res.end();
+//res.write(users[i]);
+            res.end(JSON.stringify(users[i]));
 }
 }
 
@@ -141,8 +141,8 @@ else if(req.url.includes("/getUserByName")){
 let name=req.url.split("?")[1].split("=")[1];
 for(i=0;i<users.length;i++){
 if(users[i].name==name){
-res.write(users[i]);
-            res.end();
+//res.write(users[i]);
+            res.end(JSON.stringify(users[i]));
 }
 }
 }
