@@ -110,19 +110,19 @@ else if(req.url.includes("/getTotalUsers")){
 
 const totalUser=users.length;
 //res.write("total user:",totalUser);
-            res.end(JSON.stringify({total user:,totalUser}));
+            res.end(JSON.stringify({"total user": totalUser}));
 }
 
 else if(req.url.includes("/getFirstUser")){
 //const first=users[0];
 //res.write("first user:",users[0]);
-            res.end(JSON.stringify({first user:,users[0]}));
+            res.end(JSON.stringify({"first user": users[0]}));
 }
 
 else if(req.url.includes("/getLastUser")){
 
 //res.write("last user:",users[users.length-1]);
-            res.end(JSON.stringify({last user:,users[users.length-1]}));
+            res.end(JSON.stringify({"last user": users[users.length-1]}));
 }
 
 else if(req.url.includes("/getUsersAt")){
