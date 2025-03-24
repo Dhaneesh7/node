@@ -34,7 +34,7 @@ res.end(JSON.stringify({ users }));
     else if (req.url.includes("/updateUser")) {
         const params = req.url.split("?")[1].split("&");
         const name = params[0].split("=")[1];
-        const age = params[1].split("=")[1];
+        const age = parseInt(params[1].split("=")[1]);
          
         const place = params[2].split("=")[1];
 
