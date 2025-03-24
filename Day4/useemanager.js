@@ -63,11 +63,11 @@ userFound=true;
 if(userFound){
 
 //res.write("user updated");
-            res.end("user updated");
+            res.end(JSON.stringify({message: user updated}));
 }
 else{
 //res.write("user not found");
-            res.end("user not found);
+            res.end(JSON.stringify({message:user not found}));
 }
 
     }
@@ -88,7 +88,7 @@ place
 }
 );
         //res.write("users added");
-        res.end(JSON.stringify({  "User added"}));
+        res.end(JSON.stringify({ message: User added}));
     }
 
     // **DELETE a user**
@@ -110,19 +110,19 @@ else if(req.url.includes("/getTotalUsers")){
 
 const totalUser=users.length;
 //res.write("total user:",totalUser);
-            res.end(JSON.stringify("total user:",totalUser);
+            res.end(JSON.stringify({total user:,totalUser}));
 }
 
 else if(req.url.includes("/getFirstUser")){
 //const first=users[0];
 //res.write("first user:",users[0]);
-            res.end(JSON.stringify("first user:",users[0]);
+            res.end(JSON.stringify({first user:,users[0]}));
 }
 
 else if(req.url.includes("/getLastUser")){
 
-res.write("last user:",users[users.length-1]);
-            res.end(JSON.stringify("last user:",users[users.length-1]));
+//res.write("last user:",users[users.length-1]);
+            res.end(JSON.stringify({last user:,users[users.length-1]}));
 }
 
 else if(req.url.includes("/getUsersAt")){
@@ -130,7 +130,7 @@ let place=req.url.split("?")[1].split("=")[1];
 for(i=0;i<users.length;i++){
 if(users[i].place==place){
 //res.write(users[i]);
-            res.end(JSON.stringify(users[i]));
+            res.end(JSON.stringify({users[i]}));
 }
 }
 
@@ -142,7 +142,7 @@ let name=req.url.split("?")[1].split("=")[1];
 for(i=0;i<users.length;i++){
 if(users[i].name==name){
 //res.write(users[i]);
-            res.end(JSON.stringify(users[i]));
+            res.end(JSON.stringify({users[i]}));
 }
 }
 }
