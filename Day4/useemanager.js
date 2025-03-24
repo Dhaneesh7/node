@@ -22,11 +22,12 @@ const server = http.createServer((req, res) => {
 
     // **GET all users**
     if (req.url.includes("/getAllUsers")) {
-for(i=0;i<users.length;i++){
+/*for(i=0;i<users.length;i++){
 
         res.write(users[i]);
         res.end(JSON.stringify({ users }));
-}
+}*/
+res.end(JSON.stringify({ users }));
     }
 
     // **EDIT a user name**
@@ -87,22 +88,22 @@ place
 }
 );
         res.write("users added");
-        res.end(JSON.stringify({ message: "User added", users }));
+        res.end(JSON.stringify({ message: "User added"}));
     }
 
     // **DELETE a user**
     else if (req.url.includes("/deleteUser")) {
-        const name = parseInt(req.url.split("?")[1].split("=")[1]);
+        const name = req.url.split("?")[1].split("=")[1];
 
-
+/*
         if (index >= 0 && index < users.length) {
             users.splice(index, 1);
             res.writeHead("user deleted");
             res.end(JSON.stringify({ message: "User deleted", users }));
-        } else {
-            res.writeHead(400);
-            res.end(JSON.stringify({ message: "Invalid index" }));
-        }
+        }  */
+
+
+
     }
 
 else if(req.url.includes("/getTotalUsers")){
