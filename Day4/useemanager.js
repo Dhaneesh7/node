@@ -101,7 +101,15 @@ place
             res.write("user deleted");
             res.end(JSON.stringify({ message: "User deleted", users }));
         }  */
+let index = users.map(user =>user.name).indexOf("kk");
 
+// If found, remove the user
+if (index == -1) {
+res.write("can't find");
+}
+else{
+    users.splice(index, 1);
+}
 
 
     }
