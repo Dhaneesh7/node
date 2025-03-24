@@ -4,12 +4,12 @@ let users = [
 {
 name:"Sonu",
 age :21,
-place: shornur
+place: "shornur"
 },
 {
 name:"dhaneesh",
 age :22,
-place: thrissur
+place: "thrissur"
 }
 ]; 
 
@@ -38,6 +38,7 @@ for(i=0;i<users.length;i++){
         const place = params[2].split("=")[1];
 
         const oldname = params[3].split("=")[1];
+let userFound=false;
 
      /*   if (index >= 0 && index < users.length) {
             users[index] = name;
@@ -49,15 +50,25 @@ for(i=0;i<users.length;i++){
         }*/
 for(i=0;i<users.length;i++){
 if(users[i].name==oldname){
+/*
 users[i].name=name;
 users[i].age=age;
 users[i].place=place;
-
+*/
+users[i]={name,age,place};
+userFound=true;
 }
 }
+if(userFound){
 
-res.write("user updated);
+res.write("user updated");
             res.end();
+}
+else{
+res.write("user not found");
+            res.end();
+}
+
     }
 
     // **INSERT a new user**
@@ -70,9 +81,9 @@ const place = params[2].split("=")[1];
 
 
         users.push({
-name:name,
-age:age,
-place:place
+name,
+age,
+place
 }
 );
         res.write("users added");
@@ -96,7 +107,7 @@ place:place
 
 else if(req.url.includes("/getTotalUsers")){
 
-const totalUser=users.length+1;
+const totalUser=users.length;
 res.write("total user:",totalUser);
             res.end();
 }
@@ -109,7 +120,7 @@ res.write("first user:",users[0]);
 
 else if(req.url.includes("/getLastUser")){
 
-res.write("last user:",users[users.length]);
+res.write("last user:",users[users.length-1]);
             res.end();
 }
 
