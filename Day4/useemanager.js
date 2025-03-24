@@ -63,11 +63,11 @@ userFound=true;
 if(userFound){
 
 //res.write("user updated");
-            res.end(JSON.stringify({message: user updated}));
+            res.end(JSON.stringify({message:" user updated"}));
 }
 else{
 //res.write("user not found");
-            res.end(JSON.stringify({message:user not found}));
+            res.end(JSON.stringify({message:"user not found"}));
 }
 
     }
@@ -88,7 +88,7 @@ place
 }
 );
         //res.write("users added");
-        res.end(JSON.stringify({ message: User added}));
+        res.end(JSON.stringify({ message: "User added"}));
     }
 
     // **DELETE a user**
@@ -98,7 +98,7 @@ place
 /*
         if (index >= 0 && index < users.length) {
             users.splice(index, 1);
-            res.writeHead("user deleted");
+            res.write("user deleted");
             res.end(JSON.stringify({ message: "User deleted", users }));
         }  */
 
