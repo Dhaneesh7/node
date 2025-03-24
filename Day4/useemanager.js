@@ -2,10 +2,14 @@ const http = require("http");
 
 let users = [
 {
-
-}
+name:"Sonu",
+age :21,
+place: shornur
+},
 {
-
+name:"dhaneesh",
+age :22,
+place: thrissur
 }
 ]; 
 
@@ -35,14 +39,25 @@ for(i=0;i<users.length;i++){
 
         const oldname = params[3].split("=")[1];
 
-        if (index >= 0 && index < users.length) {
+     /*   if (index >= 0 && index < users.length) {
             users[index] = name;
             res.write("user updated);
             res.end(JSON.stringify({ message: "User updated", users }));
         } else {
             res.write("invalid index");
             res.end(JSON.stringify({ message: "Invalid index" }));
-        }
+        }*/
+for(i=0;i<users.length;i++){
+if(users[i].name==oldname){
+users[i].name=name;
+users[i].age=age;
+users[i].place=place;
+
+}
+}
+
+res.write("user updated);
+            res.end();
     }
 
     // **INSERT a new user**
@@ -66,7 +81,8 @@ place:place
 
     // **DELETE a user**
     else if (req.url.includes("/deleteUser")) {
-        const index = parseInt(req.url.split("?")[1].split("=")[1], 10);
+        const name = parseInt(req.url.split("?")[1].split("=")[1]);
+
 
         if (index >= 0 && index < users.length) {
             users.splice(index, 1);
@@ -80,22 +96,43 @@ place:place
 
 else if(req.url.includes("/getTotalUsers")){
 
+const totalUser=users.length+1;
+res.write("total user:",totalUser);
+            res.end();
 }
 
 else if(req.url.includes("/getFirstUser")){
-
+//const first=users[0];
+res.write("first user:",users[0]);
+            res.end();
 }
 
 else if(req.url.includes("/getLastUser")){
 
+res.write("last user:",users[users.length]);
+            res.end();
 }
 
 else if(req.url.includes("/getUsersAt")){
+let place=req.url.split("?")[1].split("=")[1];
+for(i=0;i<users.length;i++){
+if(users[i].place==place){
+res.write(users[i]);
+            res.end();
+}
+}
 
 }
 
 else if(req.url.includes("/getUserByName")){
 
+let name=req.url.split("?")[1].split("=")[1];
+for(i=0;i<users.length;i++){
+if(users[i].name==name){
+res.write(users[i]);
+            res.end();
+}
+}
 }
     // **Handle invalid routes**
     else {
