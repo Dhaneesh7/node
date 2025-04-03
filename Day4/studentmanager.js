@@ -16,9 +16,31 @@ app.get("/getuser",(req,res)=>{
     res.json(students)
 });
 app.post("/getuser",(req,res)=>{
-const newUser = req.body;
+
+const {name,age,mark,email} = req.body;
+if(!name,!age,!mark,!email){
+ res.json({ message: "fields are empty" });
+}
+
+const emailTaken = students.some(student => student.email === email);
+if (emailTaken) {
+     res.json({ message: "Email already taken." });
+}
+
+
+let id=getNewUserId()
+let newUser={
+id:id,
+name,
+age,
+mark,
+email
+}
+
     users.push(newUser);
     res.json({message: "student added:",newUser})
+
+
 })
 app.delete("/deleteuser",(req,res)=>{
 const id=req.body;
@@ -38,4 +60,14 @@ app.delete("/deletealluser",(req,res)=>{
 
     res.json({message: "all users deleted:"})
 });
+function getNewUserId() {
+  let id = -1;
+  if(students.length>0) {
+    id = students[students.length - 1].id + 1
+  } else {
+    id = 1;
+  }
+  console.log("newly generated ID is ", id);
+  return id;
+}
 app.listen(4000)
