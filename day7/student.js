@@ -1,4 +1,5 @@
 const express = require("express");
+const {checkStudent}=require("./studentck");
 const app = express();
 const port = 3000;
 
@@ -27,6 +28,10 @@ app.post("/getuser", (req, res) => {
     if (!name || !age || !mark || !email) {
         return res.json({ message: "All fields (name, age, mark, email) are required." });
     }
+const studentExists = checkStudent(name, email);
+    if (studentExists) {
+        return res.json({ message: "A student with this name or email already exists." });
+    }
 
     const validation = validateStudent(name, age, mark, email);
 
@@ -52,8 +57,37 @@ app.post("/getuser", (req, res) => {
     students.push(newUser);
     res.json({ message: "Student added:", newUser });
 });
-
-
+app.get("/getuser/startsWith", (req, res) => {
+    const letter = req.query.letter;
+    if (!letter) {
+        return res.json({ message: "Please provide a letter to search." });
+    }
+    const filteredStudents = students.filter(student =>
+        student.name.toLowerCase().startsWith(letter.toLowerCase())
+    );
+    res.json(filteredStudents);
+});
+app.get("/getParticularStudent", (req, res) => {
+    const { name } = req.query;
+    if (!name) {
+        return res.json({ message: "Name parameter is required." });
+    }
+    const student = students.find(student => student.name.toLowerCase() === name.toLowerCase());
+    if (student) {
+        res.json(student);
+    } else {
+        res.json({ message: "Student not found." });
+    }
+});
+app.get("/getAllStudentNames", (req, res) => {
+    const studentNames = students.map(student => student.name);
+    res.json(studentNames);
+});
+app.get("/getAverageMarks", (req, res) => {
+    const totalMarks = students.reduce((sum, student) => sum + student.mark, 0);
+    const average = totalMarks / students.length;
+    res.json({ averageMarks: average });
+});
 app.delete("/deleteuser", (req, res) => {
     const { id } = req.body;  
 
