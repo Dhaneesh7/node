@@ -28,7 +28,11 @@ app.post("/getuser", (req, res) => {
         return res.json({ message: "All fields (name, age, mark, email) are required." });
     }
 
-    
+    const validation = validateStudent(name, age, mark, email);
+
+    if (!validation.status) {
+        return res.json({ message: validation.error });
+    }
     const emailTaken = students.some(student => student.email === email);
     if (emailTaken) {
         return res.json({ message: "Email already taken." });
@@ -68,7 +72,26 @@ app.delete("/deletealluser", (req, res) => {
     res.json({ message: "All users deleted." });
 });
 
+function validateStudent(name, age, mark, email) {
+    
+    if (!name || name.length < 3) {
+        return { status: false, error: "Name should be at least 3 letters." };
+    }
 
+    
+    if (typeof age !== "number" || age < 5 || age > 18) {
+        return { status: false, error: "Age should be a number and between 5 to 18." };
+    }
+
+    
+    if (typeof mark !== "number" || mark < 0 || mark > 50) {
+        return { status: false, error: "Mark should be a number and between 0 to 50." };
+    }
+
+    
+
+    return { status: true, error: "" };
+}
 function getNewUserId() {
     let id = -1;
     if (students.length > 0) {
