@@ -68,7 +68,7 @@ const teacher =dbo.teacher.find().sort({ age: 1 }).limit(1);
 }
 
 app.get('teacher/highsalary', function(req,res)=>{
-const teacher = dbo.teacher.find().sort({ salary: 1 }).limit(1);
+const teacher = dbo.teacher.find().sort({ salary: -1 }).limit(1);
     res.json(teacher[0]);
 }
 function validation (){
