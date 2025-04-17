@@ -26,3 +26,12 @@ app.get('/students/paginated', function (req, res) => {
       students
     });
 });
+
+app.delete('/students/drop', async (req, res) => {
+  
+    dboStudent.collection.drop();
+    res.json({ message: 'Student collection dropped' });
+  
+   /* res.status(500).json({ error: 'Collection drop failed or already dropped' });
+  */
+});
