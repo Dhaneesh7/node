@@ -59,14 +59,17 @@ res.json({ success: true, message: ` Teachers inserted` });
       });
 }
 app.get('teacher/oldest', function(req,res)=>{
-
+const teacher = dbo.teacher.find().sort({ age:-1 }).limit(1);
+    res.json(teacher[0]);
 }
 app.get('teacher/youngest', function(req,res)=>{
-
+const teacher =dbo.teacher.find().sort({ age: 1 }).limit(1);
+    res.json(teacher[0]);
 }
 
 app.get('teacher/highsalary', function(req,res)=>{
-
+const teacher = dbo.teacher.find().sort({ salary: 1 }).limit(1);
+    res.json(teacher[0]);
 }
 function validation (){
 
