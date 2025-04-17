@@ -35,3 +35,39 @@ app.delete('/students/drop', async (req, res) => {
    /* res.status(500).json({ error: 'Collection drop failed or already dropped' });
   */
 });
+
+
+app.post('teacher/insertteachers', function(req,res)=>{
+Teachers=req.body;
+ dbo.collection("teacher").insertMany(Teachers, function (err, res) {
+        if (err) throw err;
+
+res.json({ success: true, message: ` Teachers inserted` });
+ console.log(`Teachers inserted`);
+        client.close();
+      });
+}
+
+app.get('teacher/avgsalary', function(req,res)=>{
+Teachers=req.body;
+ dbo.collection("teacher").insertMany(Teachers, function (err, res) {
+        if (err) throw err;
+
+res.json({ success: true, message: ` Teachers inserted` });
+ console.log(`Teachers inserted`);
+        client.close();
+      });
+}
+app.get('teacher/oldest', function(req,res)=>{
+
+}
+app.get('teacher/youngest', function(req,res)=>{
+
+}
+
+app.get('teacher/highsalary', function(req,res)=>{
+
+}
+function validation (){
+
+}
