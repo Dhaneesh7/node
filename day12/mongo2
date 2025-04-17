@@ -1,0 +1,19 @@
+app.get('/students/paginated', function (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 5;
+  const skip = (page - 1) * limit;
+
+  
+    const students = dbo.Student.find({}, { name: 1, age: 1, _id: 0 })
+      .skip(skip)
+      .limit(limit);
+    
+    const total = dbo.Student.countDocuments();
+
+    res.json({
+      currentPage: page,
+      totalPages: Math.ceil(total / limit),
+      totalStudents: total,
+      students
+    });
+});
