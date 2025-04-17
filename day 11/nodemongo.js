@@ -33,21 +33,30 @@ function connectAndRun() {
 
     
     function insertManyStudents() {
-      const students = [
+     /* const students = [
         { name: "Alice", age: 22, course: "Chemistry" },
         { name: "Bob", age: 23, course: "Math" }
       ];
-      dbo.collection("student").insertMany(students, function (err, res) {
+     */
+students=req.body;
+ dbo.collection("student").insertMany(students, function (err, res) {
         if (err) throw err;
-        console.log(`${res.insertedCount} students inserted`);
+       
+res.json({ success: true, message: ` students inserted` });
+ console.log(`${res.insertedCount} students inserted`);
         client.close();
       });
     }
 
    
     function findAllStudents() {
-      dbo.collection("student").find({}).toArray(function (err, result) {
+    let studentall=dbo.collection("student").find({}).toArray(function (err, result) {
         if (err) throw err;
+/*res.json({
+            success: true,
+            payload: studentall,
+            message: 'data fetch successful'
+        });*/
         console.log("All students:", result);
         client.close();
       });
