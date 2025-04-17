@@ -1,3 +1,12 @@
+const MongoClient = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectId;
+const url = "mongodb://localhost:27017/";
+const dbName = "student";
+
+
+
+
+
 app.get('/students/paginated', function (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 5;
