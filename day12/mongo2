@@ -74,3 +74,21 @@ const teacher = dbo.teacher.find().sort({ salary: -1 }).limit(1);
 function validation (){
 
 }
+
+
+
+
+//day13
+
+
+
+app.get('/students/failed', function (req, res) => {
+  const failed =  dbo.studentsCollection.find({ mark: { $lt: 35 } }).toArray();
+  res.json(failed);
+});
+
+// Find passed students (names only)
+app.get('/students/passed-names', async (req, res) => {
+  const passed = await studentsCollection.find({ mark: { $gte: 35 } }, { projection: { name: 1, _id: 0 } }).toArray();
+  res.json(passed);
+});
