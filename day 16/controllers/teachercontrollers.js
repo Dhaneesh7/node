@@ -1,3 +1,4 @@
+
 const Teacher = require('../models/teacherModel');
 function insertTeachers(req,res){
 
@@ -43,4 +44,7 @@ Teacher.findOneAndDelete({ name: req.params.name });
 
 
 }
+
+
+module.exports = { getTeachers, insertTeachers,getTeacherMarried, getTeacherUnmarried,getTeacherByPlace,deleteTeacherById,getTeacherByName,deleteTeacherByName};
 
