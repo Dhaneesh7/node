@@ -1,6 +1,6 @@
 function insertTeachers(req,res){
 
-const newteacher= new teacherScheema({req.body})
+const newteacher= new teacher({req.body})
 }
 function getTeachers(req,res){
 
