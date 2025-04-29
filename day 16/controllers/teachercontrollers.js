@@ -1,3 +1,4 @@
+const Teacher = require('../models/teacherModel');
 function insertTeachers(req,res){
 
 const newteacher= new teacher({req.body})
@@ -19,7 +20,7 @@ const teachers =  Teacher.find({ maritalStatus: 'unmarried' });
 }
 function getTeacherByPlace(req,res){
 const { place } = req.params;
-  const teachers = await Teacher.find({ place });
+  const teachers =  Teacher.find({ place });
   res.json(teachers);
 
 }
@@ -28,3 +29,18 @@ Teacher.findByIdAndDelete(req.params.id);
   res.json({ message: "Teacher deleted successfully" });
 
 }
+function getTeacherByName(req,res){
+const teacher = Teacher.findOne({ name: req.params.name });
+  if (!teacher) {
+    res.json({ message: "Teacher not found" });
+  }
+  res.json(teacher);
+
+}
+function deleteTeacherByName(req,res){
+Teacher.findOneAndDelete({ name: req.params.name });
+  res.json({ message: "Teacher deleted successfully" });
+
+
+}
+
