@@ -1,49 +1,136 @@
-
 const Teacher = require('../models/teacherModel');
-function insertTeachers(req,res){
-
-const newteacher= new teacher({req.body})
-}
-function getTeachers(req,res){
-
-const teachers = Teacher.find();
-    res.json(teachers);
-}
-function getTeacherMarried(req,res){
-
-const teachers =  Teacher.find({ maritalStatus: 'married' });
-  res.json({ count: teachers.length, teachers });
-}
-function getTeacherUnmarried(req,res){
-
-const teachers =  Teacher.find({ maritalStatus: 'unmarried' });
-  res.json({ count: teachers.length, teachers });
-}
-function getTeacherByPlace(req,res){
-const { place } = req.params;
-  const teachers =  Teacher.find({ place });
-  res.json(teachers);
-
-}
-function deleteTeacherById(req,res){
-Teacher.findByIdAndDelete(req.params.id);
-  res.json({ message: "Teacher deleted successfully" });
-
-}
-function getTeacherByName(req,res){
-const teacher = Teacher.findOne({ name: req.params.name });
-  if (!teacher) {
-    res.json({ message: "Teacher not found" });
+const Response = require('../shared/Response');
+function insertTeachers(req, res) {
+  try {
+    const newTeacher = new Teacher(req.body);
+    const savedTeacher =  newTeacher.save();
+Response.setSuccess(true);
+Response.setMessage("Teacher inserted successfully");
+    res.status(201).json(savedTeacher);
+res.json("Teacher inserted successfully");
+  } catch (err) {
+    res.status(400).json("Error inserting teacher", err);
   }
-  res.json(teacher);
-
-}
-function deleteTeacherByName(req,res){
-Teacher.findOneAndDelete({ name: req.params.name });
-  res.json({ message: "Teacher deleted successfully" });
-
-
 }
 
 
-module.exports = { getTeachers, insertTeachers,getTeacherMarried, getTeacherUnmarried,getTeacherByPlace,deleteTeacherById,getTeacherByName,deleteTeacherByName};
+function getTeachers(req, res) {
+  
+     Teacher.find().then(result=>{
+Response.setSuccess(true);
+Response.setPayload(result);
+Response.setMessage("Teacher retrieve successfully");
+res.json(result);
+
+
+    }).catch(err=>{
+res.json(err);
+})
+}
+
+// Get Married Teachers
+ function getTeacherMarried(req, res) {
+  
+     Teacher.find({ maritalStatus: 'married' }).then(result=>{
+Response.setSuccess(true);
+Response.setPayload(result);
+Response.setMessage("Teacher retrieve successfully");
+res.json(result);
+
+
+    }).catch(err=>{
+res.json(err);
+})
+    
+}
+
+// Get Unmarried Teachers
+async function getTeacherUnmarried(req, res) {
+ 
+    Teacher.find({ maritalStatus: 'unmarried' }).then(result=>{
+Response.setSuccess(true);
+Response.setPayload(result);
+Response.setMessage("Teacher retrieve successfully");
+res.json(result);
+
+
+    }).catch(err=>{
+res.json(err);
+})
+    
+}
+
+// Get Teachers by Place
+async function getTeacherByPlace(req, res) {
+ 
+    const { place } = req.params;
+    cTeacher.find({ place }).then(result=>{
+Response.setSuccess(true);
+Response.setPayload(result);
+Response.setMessage("Teacher retrieve successfully");
+res.json(result);
+
+
+    }).catch(err=>{
+res.json(err);
+})
+    
+}
+
+// Delete by ID
+ function deleteTeacherById(req, res) {
+  
+    Teacher.findByIdAndDelete(req.params.id).then(result=>{
+Response.setSuccess(true);
+Response.setPayload(result);
+Response.setMessage("Teacher deleted successfully");
+res.json(result);
+
+
+    }).catch(err=>{
+res.json(err);
+})
+    
+}
+
+// Get Teacher by Name
+function getTeacherByName(req, res) {
+  Teacher.findOne({ name: req.params.name }).then(result=>{
+Response.setSuccess(true);
+Response.setPayload(result);
+Response.setMessage("Teacher retrieve successfully");
+res.json(result);
+
+
+    }).catch(err=>{
+res.json(err);
+})
+    
+}
+
+// Delete by Name
+async function deleteTeacherByName(req, res) {
+ 
+  Teacher.findOneAndDelete({ name: req.params.name }).then(result=>{
+Response.setSuccess(true);
+Response.setPayload(result);
+Response.setMessage("Teacher deleted successfully");
+res.json(result);
+
+
+    }).catch(err=>{
+res.json(err);
+})
+    
+}
+
+module.exports = {
+  getTeachers,
+  insertTeachers,
+  getTeacherMarried,
+  getTeacherUnmarried,
+  getTeacherByPlace,
+  deleteTeacherById,
+  getTeacherByName,
+  deleteTeacherByName
+};
