@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const teacher = new mongoose.Schema({
+const teacherSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -42,7 +42,12 @@ const teacher = new mongoose.Schema({
     type: String,
     required: true,
   //  match: /^[0-9]{10}$/
-  }
+  },
+updatedAt: Date,
+  createdBy: String
 });
-
-module.exports = mongoose.model('Teacher', teacher);
+teacherSchema.pre('save', function (next) {
+  this.updatedAt = new Date();
+  next();
+});
+module.exports = mongoose.model('Teacher', teacherSchema);
