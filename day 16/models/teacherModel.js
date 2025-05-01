@@ -50,4 +50,10 @@ teacherSchema.pre('save', function (next) {
   this.updatedAt = new Date();
   next();
 });
+teacherSchema.pre('findOneAndUpdate', function (next) {
+  const user =  mongoose.model('User').findOne(); 
+  this._update.createdBy = user ? user._id.toString() : 'system';
+  next();
+});
+
 module.exports = mongoose.model('Teacher', teacherSchema);
