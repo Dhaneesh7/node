@@ -21,10 +21,11 @@ Response.setSuccess(true);
 Response.setPayload(result);
 Response.setMessage("Teacher retrieve successfully");
 res.json(result);
-
+ res.render('teachers', { result });//ejs file
 
     }).catch(err=>{
 res.json(err);
+res.render('error',{message: 'Failed to load teachers.'})
 })
 }
 
