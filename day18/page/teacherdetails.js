@@ -3,7 +3,7 @@
 <head>
   <title>All Teachers</title>
 <script>
-async function deleteTeacher(teacher) {
+async function deleteTeacher(teacher/*id*/) {
       if (teacher) {
         try {
 teacher..deleteOne({ age: { $gte: 10 } }).then(function(){
@@ -11,8 +11,12 @@ teacher..deleteOne({ age: { $gte: 10 } }).then(function(){
 }).catch(function(error){
     console.log(error); // Failure
 });
-
-          const response = await fetch(`/teachers/delete/${id}`, {
+/*const res = await fetch(`/teachers/delete/${teacher._id}`, { method: 'DELETE' });
+        const data = await res.json();
+        alert(data.message);
+        location.reload();
+*/
+      /*    const response = await fetch(`/teachers/delete/${id}`, {
             method: 'DELETE'
           });
           const result = await response.json();
@@ -26,7 +30,7 @@ teacher..deleteOne({ age: { $gte: 10 } }).then(function(){
           alert('Error deleting teacher');
           console.error(error);
         }
-      }
+      }*/
     }
   </script>
 </head>
@@ -48,7 +52,7 @@ teacher..deleteOne({ age: { $gte: 10 } }).then(function(){
         <td><%= teacher.maritalStatus %></td>
         <td>
           
-              <button onclick="deleteTeacher('<%= teacher%>')">Delete</button>
+              <button onclick="deleteTeacher('<%= teacher/*teacher._id*/%>')">Delete</button>
        
           
         </td>
