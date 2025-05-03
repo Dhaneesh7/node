@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Car Details</title>
+  <script>
+    function showDetails(carName) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('name', carName);
+      window.location.href = url.toString();
+    }
+  </script>
+</head>
+<body>
+  <h1>All Cars</h1>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Brand</th>
+      <th>Action</th>
+    </tr>
+    <% allCars.forEach(car => { %>
+      <tr>
+        <td><%= car.name %></td>
+        <td><%= car.brand %></td>
+        <td><button onclick="showDetails('<%= car.name %>')">View Details</button></td>
+      </tr>
+    <% }); %>
+  </table>
+
+  <% if (selectedCar) { %>
+    <h2>Car Details: <%= selectedCar.name %></h2>
+    <table border="1">
+      <tr><td>Brand</td><td><%= selectedCar.brand %></td></tr>
+      <tr><td>Price</td><td><%= selectedCar.price %></td></tr>
+      <tr><td>Fuel Type</td><td><%= selectedCar.fuelType %></td></tr>
+      <tr><td>Year</td><td><%= selectedCar.year %></td></tr>
+    </table>
+  <% } %>
+</body>
+</html>
